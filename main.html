@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather App</title>
+  <link rel="icon" href="./images/sunny.png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  <script src= "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"> </script> 
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+
+<main class="main-container">
+    <div class="location-and-date">
+        <div class="header__container">
+            <h1 class="location-and-date__location"></h1>
+            <div class="location-and-date__date">Sunday 4th August</div>
+        </div>
+    
+        <div class="search-sec">
+            <input class="search-box" type="text" placeholder="ENTER A CITY NAME"/>
+            <button class="search-btn">
+                <iconify-icon icon="teenyicons:search-outline" width="25"></iconify-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="current-temperature">
+        <div class="current-temperature__icon-container"></div>
+        <div class="current-temperature__content-container"></div>
+    </div>
+
+    <div class="current-stats">
+        <div>
+        <div class="current-stats__value" id="high-temp"></div>
+        <div class="current-stats__label">High</div>
+        <div class="current-stats__value" id="low-temp"></div>
+        <div class="current-stats__label">Low</div>
+        </div>
+        <div>
+        <div class="current-stats__value" id="wind"></div>
+        <div class="current-stats__label">Wind</div>
+        <div class="current-stats__value" id="visibility"></div>
+        <div class="current-stats__label">Visibility</div>
+        </div>
+        <div>
+        <div class="current-stats__value" id="sunrise"></div>
+        <div class="current-stats__label">Sunrise</div>
+        <div class="current-stats__value" id="sunset"></div>
+        <div class="current-stats__label">Sunset</div>
+        </div>
+    </div>
+
+    <!-- hourly -->
+    <div class="weather-by-hour">
+        <h2 class="weather-by-hour__heading">Today's weather</h2>
+        <div class="weather-by-hour__container"></div>
+    </div>
+
+
+    <div class="next-5-days">
+        <h2 class="next-5-days__heading">Next 5 days</h2>
+        <div class="next-5-days__container"></div>
+  </div>
+
+</main>
+<script type="module" src="main.js"></script>
+</body>
+</html>
