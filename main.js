@@ -3,7 +3,7 @@ import hourlyFetch  from "./hourly.js"
 import dailyFetch from './dailyFetch.js'
 
 const key = '9022275b769966d839ab137935d7ff43';
-const currentWeatherURL = `http://api.openweathermap.org/data/2.5/weather?appid=${key}&units=metric&q=London`;
+const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?appid=${key}&units=metric&q=London`;
 
 console.log('Request URL:', currentWeatherURL);
 window.addEventListener('load', async () => {
