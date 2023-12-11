@@ -1,14 +1,23 @@
 const key = '9022275b769966d839ab137935d7ff43'
-const url = `http://api.openweathermap.org/data/2.5/forecast?appid=${key}&units=metric&q=`
+const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${key}&units=metric&q=`
 
 const weatherByHourContainer = document.querySelector('.weather-by-hour__container')
 
-export default async function hourlyFetch(city){
-    const res = await fetch(url + city)
-    const data = await res.json()
-
-    hourlyTemp(data)
-}
+export default async function hourlyFetch(city) {
+    try {
+      const res = await fetch(`${url}${city}`);
+  
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+  
+      const data = await res.json();
+      hourlyTemp(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle the error, e.g., display a message to the user
+    }
+  }
 
 function hourlyTemp(data){
     weatherByHourContainer.innerHTML = ''
@@ -27,6 +36,7 @@ function hourlyTemp(data){
         const iconUrl = "https://openweathermap.org/img/w/"+iconId+".png"
         const weatherByHourImg = document.createElement('img')
         weatherByHourImg.src= iconUrl
+        weatherByHourImg.alt="weather_icon"
 
         // get hourly temp
         const weatherByHourTmep = document.createElement('div')
@@ -44,4 +54,7 @@ function hourlyTemp(data){
         
     }
 }
+
+
+
 

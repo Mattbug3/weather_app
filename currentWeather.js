@@ -1,16 +1,26 @@
 const key = '9022275b769966d839ab137935d7ff43'
-const url = `http://api.openweathermap.org/data/2.5/weather?appid=${key}&units=metric&q=`
+const url = `https://api.openweathermap.org/data/2.5/weather?appid=${key}&units=metric&q=`
 
 const location = document.querySelector('.location-and-date__location')
 const date = document.querySelector('.location-and-date__date')
 const iconContainer = document.querySelector('.current-temperature__icon-container')
 const tempContainer = document.querySelector('.current-temperature__content-container')
 
-async function currentWeatherFetch(city){
-    const res = await fetch(url + city)
-    const data = await res.json()
-    currentTemp(data)
-}
+export default async function currentWeatherFetch(city) {
+    try {
+      const res = await fetch(`${url}${city}`);
+  
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+  
+      const data = await res.json();
+      currentTemp(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle the error, e.g., display a message to the user
+    }
+  }
 
 
 function currentTemp(data){
@@ -29,6 +39,7 @@ function currentTemp(data){
     const icon = document.createElement('img')
     icon.setAttribute('class', 'current-temperature__icon')
     icon.src= iconUrl
+    icon.alt="current-temperature__icon"
     iconContainer.appendChild(icon)
 
     // ----get current temp---
@@ -54,4 +65,3 @@ function currentStatus(data){
     document.querySelector('#sunset').innerHTML = moment.unix(data.sys.sunset).utc().add(data.timezone, 's').format('HH:mm')
 }
 
-export default currentWeatherFetch

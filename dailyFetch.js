@@ -1,14 +1,22 @@
 const key = '9022275b769966d839ab137935d7ff43'
-const url = `http://api.openweathermap.org/data/2.5/forecast?appid=${key}&units=metric&q=`
-
+const url = `https://api.openweathermap.org/data/2.5/forecast?appid=${key}&units=metric&q=`
 const nextFiveDaysContainer = document.querySelector('.next-5-days__container')
 
-export default async function dailyFetch(city){
-    const res = await fetch(url + city)
-    const data = await res.json()
-
-    dailyTemp(data)
-}
+export default async function dailyFetch(city) {
+	try {
+	  const res = await fetch(`${url}${city}`);
+  
+	  if (!res.ok) {
+		throw new Error(`HTTP error! Status: ${res.status}`);
+	  }
+  
+	  const data = await res.json();
+	  dailyTemp(data);
+	} catch (error) {
+	  console.error('Error fetching data:', error);
+	  // Handle the error, e.g., display a message to the user
+	}
+  }
 
 function dailyTemp(data){
 	// -------clear daily forecast container every time before appending new child-----
@@ -41,6 +49,7 @@ function dailyTemp(data){
 		const iconImg = document.createElement('img')
 		iconImg.setAttribute('class','icon-image')
 		iconImg.src=iconUrl
+		iconImg.alt="icon-image"
 		iconImg.style.width = '50px'
 		//append weather description & weather icon to icon container div
 		const nextFiveDaysIcon = document.createElement('div')
